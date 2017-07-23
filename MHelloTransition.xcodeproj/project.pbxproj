@@ -13,7 +13,17 @@
 		90C095761F223F520006FA7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90C095741F223F520006FA7D /* Main.storyboard */; };
 		90C095781F223F520006FA7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90C095771F223F520006FA7D /* Assets.xcassets */; };
 		90C0957B1F223F520006FA7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90C095791F223F520006FA7D /* LaunchScreen.storyboard */; };
-		90C095851F2241380006FA7D /* ImageTransitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C095841F2241380006FA7D /* ImageTransitionViewController.m */; };
+		90C095851F2241380006FA7D /* ImageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C095841F2241380006FA7D /* ImageListViewController.m */; };
+		90C095881F2344D20006FA7D /* M2ImageNavigationTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C095871F2344D20006FA7D /* M2ImageNavigationTransition.m */; };
+		90C0958B1F2387BF0006FA7D /* ImageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0958A1F2387BF0006FA7D /* ImageDetailViewController.m */; };
+		90C0958E1F2470D70006FA7D /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0958D1F2470D70006FA7D /* ImageCell.m */; };
+		90C095961F2485290006FA7D /* image0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90C095901F2485290006FA7D /* image0@2x.png */; };
+		90C095971F2485290006FA7D /* image1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90C095911F2485290006FA7D /* image1@2x.png */; };
+		90C095981F2485290006FA7D /* image2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90C095921F2485290006FA7D /* image2@2x.png */; };
+		90C095991F2485290006FA7D /* image3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90C095931F2485290006FA7D /* image3@2x.png */; };
+		90C0959A1F2485290006FA7D /* image4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90C095941F2485290006FA7D /* image4@2x.png */; };
+		90C0959B1F2485290006FA7D /* image5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90C095951F2485290006FA7D /* image5@2x.png */; };
+		90C0959E1F2493260006FA7D /* M2ImageNavigationInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0959D1F2493260006FA7D /* M2ImageNavigationInteractiveTransition.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,8 +37,22 @@
 		90C095771F223F520006FA7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		90C0957A1F223F520006FA7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		90C0957C1F223F520006FA7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		90C095831F2241380006FA7D /* ImageTransitionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTransitionViewController.h; sourceTree = "<group>"; };
-		90C095841F2241380006FA7D /* ImageTransitionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTransitionViewController.m; sourceTree = "<group>"; };
+		90C095831F2241380006FA7D /* ImageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageListViewController.h; sourceTree = "<group>"; };
+		90C095841F2241380006FA7D /* ImageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageListViewController.m; sourceTree = "<group>"; };
+		90C095861F2344D20006FA7D /* M2ImageNavigationTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M2ImageNavigationTransition.h; sourceTree = "<group>"; };
+		90C095871F2344D20006FA7D /* M2ImageNavigationTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M2ImageNavigationTransition.m; sourceTree = "<group>"; };
+		90C095891F2387BF0006FA7D /* ImageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDetailViewController.h; sourceTree = "<group>"; };
+		90C0958A1F2387BF0006FA7D /* ImageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDetailViewController.m; sourceTree = "<group>"; };
+		90C0958C1F2470D70006FA7D /* ImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCell.h; sourceTree = "<group>"; };
+		90C0958D1F2470D70006FA7D /* ImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCell.m; sourceTree = "<group>"; };
+		90C095901F2485290006FA7D /* image0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image0@2x.png"; sourceTree = "<group>"; };
+		90C095911F2485290006FA7D /* image1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image1@2x.png"; sourceTree = "<group>"; };
+		90C095921F2485290006FA7D /* image2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image2@2x.png"; sourceTree = "<group>"; };
+		90C095931F2485290006FA7D /* image3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image3@2x.png"; sourceTree = "<group>"; };
+		90C095941F2485290006FA7D /* image4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image4@2x.png"; sourceTree = "<group>"; };
+		90C095951F2485290006FA7D /* image5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image5@2x.png"; sourceTree = "<group>"; };
+		90C0959C1F2493260006FA7D /* M2ImageNavigationInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M2ImageNavigationInteractiveTransition.h; sourceTree = "<group>"; };
+		90C0959D1F2493260006FA7D /* M2ImageNavigationInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M2ImageNavigationInteractiveTransition.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,11 +110,33 @@
 		90C095821F2240FC0006FA7D /* Transition */ = {
 			isa = PBXGroup;
 			children = (
-				90C095831F2241380006FA7D /* ImageTransitionViewController.h */,
-				90C095841F2241380006FA7D /* ImageTransitionViewController.m */,
+				90C095831F2241380006FA7D /* ImageListViewController.h */,
+				90C095841F2241380006FA7D /* ImageListViewController.m */,
+				90C0958C1F2470D70006FA7D /* ImageCell.h */,
+				90C0958D1F2470D70006FA7D /* ImageCell.m */,
+				90C0958F1F2484930006FA7D /* Image */,
+				90C095891F2387BF0006FA7D /* ImageDetailViewController.h */,
+				90C0958A1F2387BF0006FA7D /* ImageDetailViewController.m */,
+				90C095861F2344D20006FA7D /* M2ImageNavigationTransition.h */,
+				90C095871F2344D20006FA7D /* M2ImageNavigationTransition.m */,
+				90C0959C1F2493260006FA7D /* M2ImageNavigationInteractiveTransition.h */,
+				90C0959D1F2493260006FA7D /* M2ImageNavigationInteractiveTransition.m */,
 			);
 			name = Transition;
 			path = Sources/Transition;
+			sourceTree = "<group>";
+		};
+		90C0958F1F2484930006FA7D /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				90C095901F2485290006FA7D /* image0@2x.png */,
+				90C095911F2485290006FA7D /* image1@2x.png */,
+				90C095921F2485290006FA7D /* image2@2x.png */,
+				90C095931F2485290006FA7D /* image3@2x.png */,
+				90C095941F2485290006FA7D /* image4@2x.png */,
+				90C095951F2485290006FA7D /* image5@2x.png */,
+			);
+			path = Image;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,8 +198,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				90C0957B1F223F520006FA7D /* LaunchScreen.storyboard in Resources */,
+				90C0959A1F2485290006FA7D /* image4@2x.png in Resources */,
+				90C095981F2485290006FA7D /* image2@2x.png in Resources */,
+				90C095961F2485290006FA7D /* image0@2x.png in Resources */,
 				90C095781F223F520006FA7D /* Assets.xcassets in Resources */,
+				90C095991F2485290006FA7D /* image3@2x.png in Resources */,
+				90C095971F2485290006FA7D /* image1@2x.png in Resources */,
 				90C095761F223F520006FA7D /* Main.storyboard in Resources */,
+				90C0959B1F2485290006FA7D /* image5@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,10 +216,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90C095881F2344D20006FA7D /* M2ImageNavigationTransition.m in Sources */,
 				90C095731F223F520006FA7D /* ViewController.m in Sources */,
 				90C095701F223F520006FA7D /* AppDelegate.m in Sources */,
+				90C0958E1F2470D70006FA7D /* ImageCell.m in Sources */,
 				90C0956D1F223F520006FA7D /* main.m in Sources */,
-				90C095851F2241380006FA7D /* ImageTransitionViewController.m in Sources */,
+				90C095851F2241380006FA7D /* ImageListViewController.m in Sources */,
+				90C0959E1F2493260006FA7D /* M2ImageNavigationInteractiveTransition.m in Sources */,
+				90C0958B1F2387BF0006FA7D /* ImageDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

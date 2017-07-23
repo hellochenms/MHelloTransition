@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ImageTransitionViewController : UIViewController
+@interface ImageListViewController : UIViewController
 
 @end

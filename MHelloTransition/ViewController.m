@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "ImageTransitionViewController.h"
+#import "ImageListViewController.h"
 
 @interface ViewController (Table)<UITableViewDataSource, UITableViewDelegate>
 - (void)initDatas;
@@ -58,7 +58,7 @@
 @implementation ViewController (Table)
 #pragma mark - Init
 - (void)initDatas {
-    self.datas = @[@[@"展示大图", [ImageTransitionViewController class]],
+    self.datas = @[@[@"展示大图", [ImageListViewController class]],
                    ];
 }
 
