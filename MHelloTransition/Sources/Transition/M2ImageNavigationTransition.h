@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol M2ImageNavigationTransitionDelegate;
 
 typedef NS_ENUM(NSUInteger, M2IPTImageNavigationTransitionType) {
     M2IPTImageNavigationTransitionTypePush,
@@ -18,4 +19,9 @@ typedef NS_ENUM(NSUInteger, M2IPTImageNavigationTransitionType) {
 + (instancetype)transitionWithType:(M2IPTImageNavigationTransitionType)type;
 - (instancetype)initWithType:(M2IPTImageNavigationTransitionType)type;
 
+@end
+
+@protocol M2ImageNavigationTransitionDelegate <NSObject>
+@required
+- (UIImageView *)m2_imageView;
 @end

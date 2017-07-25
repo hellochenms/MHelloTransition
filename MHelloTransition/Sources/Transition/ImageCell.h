@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ImageCell : UICollectionViewCell
-@property (nonatomic) UIImageView *imageView;
+@property (nonatomic, readonly) UIImageView *imageView;
 - (void)configWithData:(NSString *)imageName;
 @end

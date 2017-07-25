@@ -20,6 +20,7 @@ static NSString * const kCellIdentifier = @"kCellIdentifier";
 @interface ImageListViewController ()<UINavigationControllerDelegate>
 @property (nonatomic) UICollectionView *collectionView;
 @property (nonatomic) NSArray *datas;
+@property (nonatomic) UIImageView *selectedImageView;
 @end
 
 @implementation ImageListViewController
@@ -70,6 +71,11 @@ static NSString * const kCellIdentifier = @"kCellIdentifier";
     return nil;
 }
 
+#pragma mark - M2ImageNavigationTransitionDelegate
+- (UIImageView *)m2_imageView {
+    return self.selectedImageView;
+}
+
 #pragma mark - Getter
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
@@ -114,7 +120,12 @@ static NSString * const kCellIdentifier = @"kCellIdentifier";
 
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    ImageCell *cell = (ImageCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    self.selectedImageView = cell.imageView;
+    
     ImageDetailViewController *controller = [ImageDetailViewController new];
+    NSString *imageName = self.datas[indexPath.row];
+    controller.imageName = imageName;
     [self.navigationController pushViewController:controller animated:YES];
 }
 

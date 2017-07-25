@@ -8,13 +8,15 @@
 
 #import "ImageCell.h"
 
+@interface ImageCell ()
+@property (nonatomic) UIImageView *imageView;
+@end
+
 @implementation ImageCell
 #pragma mark - Life Cycle
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor blueColor];
-        
         [self.contentView addSubview:self.imageView];
     }
     

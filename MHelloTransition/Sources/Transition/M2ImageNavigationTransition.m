@@ -29,7 +29,7 @@
 
 #pragma mark - UIViewControllerAnimatedTransitioning
 - (NSTimeInterval)transitionDuration:(nullable id <UIViewControllerContextTransitioning>)transitionContext {
-    return 0.5;
+    return 2;
 }
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
@@ -42,37 +42,65 @@
 
 #pragma mark - 
 - (void)push:(id<UIViewControllerContextTransitioning>)transitionContext {
-    UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-    
-    CGRect screenBounds = [UIScreen mainScreen].bounds;
-    
-    toViewController.view.frame = CGRectOffset(toViewController.view.frame, 0, CGRectGetHeight(screenBounds));
     UIView *container = [transitionContext containerView];
-    [container addSubview:toViewController.view];
+    UIViewController<M2ImageNavigationTransitionDelegate> *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    UIImageView *fromImageView = [fromViewController m2_imageView];
+    UIViewController<M2ImageNavigationTransitionDelegate> *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    UIImageView *toImageView = [toViewController m2_imageView];
     
-    CGRect toViewControllerFinalRect = [transitionContext finalFrameForViewController:toViewController];
+    // before
+    fromImageView.hidden = YES;
+    
+    [container addSubview:toViewController.view];
+    toViewController.view.alpha = 0;
+    toImageView.hidden = YES;
+    
+    UIView *tempImageView = [fromImageView snapshotViewAfterScreenUpdates:NO];
+    [container addSubview:tempImageView];
+    CGRect tempFromFrame = [container convertRect:fromImageView.frame fromView:fromImageView.superview];
+    CGRect tempToFrame = [container convertRect:toImageView.frame fromView:toImageView.superview];
+    tempImageView.frame = tempFromFrame;
+    
+    // animation
     [UIView animateWithDuration:[self transitionDuration:transitionContext]
                      animations:^{
-                         toViewController.view.frame = toViewControllerFinalRect;
+                         tempImageView.frame = tempToFrame;
+                         toViewController.view.alpha = 1.0;
                      } completion:^(BOOL finished) {
+                         fromImageView.hidden = NO;
+                         toImageView.hidden = NO;
+                         [tempImageView removeFromSuperview];
                          [transitionContext completeTransition:YES];
                      }];
 }
 
 - (void)pop:(id<UIViewControllerContextTransitioning>)transitionContext {
     UIView *container = [transitionContext containerView];
-    UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-    UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    UIViewController<M2ImageNavigationTransitionDelegate> *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    UIImageView *fromImageView = [fromViewController m2_imageView];
+    UIViewController<M2ImageNavigationTransitionDelegate> *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    UIImageView *toImageView = [toViewController m2_imageView];
+    
+    // before
+    fromImageView.hidden = YES;
     [container insertSubview:toViewController.view belowSubview:fromViewController.view];
+    toImageView.hidden = YES;
     
-    CGRect fromViewControllerInitialFrame = [transitionContext initialFrameForViewController:fromViewController];
-    CGRect screenBounds = [UIScreen mainScreen].bounds;
-    CGRect fromViewControllerFinalRect = CGRectOffset(fromViewControllerInitialFrame, 0, CGRectGetHeight(screenBounds));
+    UIView *tempImageView = [fromImageView snapshotViewAfterScreenUpdates:NO];
+    [container addSubview:tempImageView];
+    CGRect tempFromFrame = [container convertRect:fromImageView.frame fromView:fromImageView.superview];
+    CGRect tempToFrame = [container convertRect:toImageView.frame fromView:toImageView.superview];
+    tempImageView.frame = tempFromFrame;
     
+    // animation
     [UIView animateWithDuration:[self transitionDuration:transitionContext]
                      animations:^{
-                         fromViewController.view.frame = fromViewControllerFinalRect;
+                         tempImageView.frame = tempToFrame;
+                         fromViewController.view.alpha = 0.0;
                      } completion:^(BOOL finished) {
+                         fromImageView.hidden = NO;
+                         toImageView.hidden = NO;
+                         [tempImageView removeFromSuperview];
                          [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
                      }];
 }

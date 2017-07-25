@@ -12,7 +12,7 @@
 #import "M2ImageNavigationInteractiveTransition.h"
 
 @interface ImageDetailViewController ()<UINavigationControllerDelegate>
-@property (nonatomic) UIButton *popButton;
+@property (nonatomic) UIImageView *imageView;
 @property (nonatomic) M2ImageNavigationInteractiveTransition *interactiveTransition;
 @end
 
@@ -23,15 +23,28 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [self.view addSubview:self.popButton];
-    
+    [self.view addSubview:self.imageView];
+    self.imageView.image = [UIImage imageNamed:self.imageName];
     
     [self.interactiveTransition bindPopViewController:self];
 }
 
 #pragma mark - Life Cycle
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self layoutMySubviews];
+}
+
 - (void)viewWillLayoutSubviews {
-    self.popButton.frame = CGRectMake(20, 64 + 20, 100, 60);
+    [self layoutMySubviews];
+}
+
+- (void)layoutMySubviews {
+    double containerWidth = CGRectGetWidth(self.view.bounds);
+    double margin = 20;
+    double imageWidth = containerWidth - margin * 2;
+    self.imageView.frame = CGRectMake(margin, 64 + 20, imageWidth, imageWidth);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -70,22 +83,20 @@
     return nil;
 }
 
-#pragma mark - Event
-- (void)onTapPop {
-    [self.navigationController popViewControllerAnimated:YES];
+#pragma mark - M2ImageNavigationTransitionDelegate
+- (UIImageView *)m2_imageView {
+    return self.imageView;
 }
 
 #pragma mark - Getter
-- (UIButton *)popButton {
-    if (!_popButton) {
-        _popButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _popButton.backgroundColor = [UIColor brownColor];
-        [_popButton setTitle:@"pop" forState:UIControlStateNormal];
-        [_popButton addTarget:self action:@selector(onTapPop) forControlEvents:UIControlEventTouchUpInside];
+- (UIImageView *)imageView {
+    if (!_imageView) {
+        _imageView = [UIImageView new];
     }
     
-    return _popButton;
+    return _imageView;
 }
+
 
 - (M2ImageNavigationInteractiveTransition *)interactiveTransition {
     if (!_interactiveTransition) {

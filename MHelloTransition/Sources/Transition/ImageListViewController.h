@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "M2ImageNavigationTransition.h"
 
-@interface ImageListViewController : UIViewController
+@interface ImageListViewController : UIViewController<M2ImageNavigationTransitionDelegate>
 
 @end
