@@ -97,7 +97,6 @@
     return _imageView;
 }
 
-
 - (M2ImageNavigationInteractiveTransition *)interactiveTransition {
     if (!_interactiveTransition) {
         _interactiveTransition = [M2ImageNavigationInteractiveTransition new];

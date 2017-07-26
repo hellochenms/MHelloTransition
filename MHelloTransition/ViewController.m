@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "ImageListViewController.h"
+#import "DeepeningListViewController.h"
 
 @interface ViewController (Table)<UITableViewDataSource, UITableViewDelegate>
 - (void)initDatas;
@@ -58,7 +59,8 @@
 @implementation ViewController (Table)
 #pragma mark - Init
 - (void)initDatas {
-    self.datas = @[@[@"展示大图", [ImageListViewController class]],
+    self.datas = @[@[@"Navi展示大图", [ImageListViewController class]],
+                   @[@"Navi渐深", [DeepeningListViewController class]],
                    ];
 }
 
