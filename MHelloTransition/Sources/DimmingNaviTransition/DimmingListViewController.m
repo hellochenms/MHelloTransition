@@ -6,20 +6,20 @@
 //  Copyright © 2017年 chenms.m2. All rights reserved.
 //
 
-#import "DeepeningListViewController.h"
-#import "M2DeepeningNavigationTransition.h"
-#import "DeepeningDetailViewController.h"
+#import "DimmingListViewController.h"
+#import "M7DimmingNavigationTransition.h"
+#import "DimmingDetailViewController.h"
 
-@interface DeepeningListViewController (Table)<UITableViewDataSource, UITableViewDelegate>
+@interface DimmingListViewController (Table)<UITableViewDataSource, UITableViewDelegate>
 - (void)initDatas;
 @end
 
-@interface DeepeningListViewController ()<UINavigationControllerDelegate>
+@interface DimmingListViewController ()
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) NSArray *datas;
 @end
 
-@implementation DeepeningListViewController
+@implementation DimmingListViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,32 +40,6 @@
     self.tableView.frame = self.view.bounds;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    self.navigationController.delegate = self;
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    if (self.navigationController.delegate == self) {
-        self.navigationController.delegate = nil;
-    }
-}
-
-#pragma mark - UINavigationControllerDelegate
-- (nullable id <UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
-                                            animationControllerForOperation:(UINavigationControllerOperation)operation
-                                                         fromViewController:(UIViewController *)fromVC
-                                                           toViewController:(UIViewController *)toVC {
-    if (operation == UINavigationControllerOperationPush) {
-        return [M2DeepeningNavigationTransition transitionWithType:M2DNTDeepeningNavigationTransitionTypePush];
-    }
-    
-    return nil;
-}
-
 #pragma mark - Getter
 - (UITableView *)tableView {
     if (!_tableView) {
@@ -81,7 +55,7 @@
 
 #pragma mark -
 #pragma mark - DeepeningListViewController (Table)
-@implementation DeepeningListViewController (Table)
+@implementation DimmingListViewController (Table)
 #pragma mark - Init
 - (void)initDatas {
     NSMutableArray *datas = [NSMutableArray array];
@@ -111,7 +85,8 @@
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    DeepeningDetailViewController *controller = [DeepeningDetailViewController new];
+    DimmingDetailViewController *controller = [DimmingDetailViewController new];
+    self.navigationController.delegate = controller;
     [self.navigationController pushViewController:controller animated:YES];
 }
 

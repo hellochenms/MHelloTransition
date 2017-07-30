@@ -8,7 +8,10 @@
 
 #import "ViewController.h"
 #import "ImageListViewController.h"
-#import "DeepeningListViewController.h"
+#import "DimmingListViewController.h"
+#import "DimmingPresentListViewController.h"
+#import "DimmingPresentOverFullScreenListViewController.h"
+#import "DimmingPresentOverFullScreenScaleListViewController.h"
 
 @interface ViewController (Table)<UITableViewDataSource, UITableViewDelegate>
 - (void)initDatas;
@@ -60,7 +63,10 @@
 #pragma mark - Init
 - (void)initDatas {
     self.datas = @[@[@"Navi展示大图", [ImageListViewController class]],
-                   @[@"Navi渐深", [DeepeningListViewController class]],
+                   @[@"Navi渐深", [DimmingListViewController class]],
+                   @[@"Present渐深", [DimmingPresentListViewController class]],
+                   @[@"PresentOverFullScreeb渐深", [DimmingPresentOverFullScreenListViewController class]],
+                   @[@"PresentOverFullScreeb渐深Scale(不支持手势)", [DimmingPresentOverFullScreenScaleListViewController class]],
                    ];
 }
 

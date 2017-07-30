@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "M2ImageNavigationTransition.h"
 
-@interface ImageDetailViewController : UIViewController<M2ImageNavigationTransitionDelegate>
+@interface ImageDetailViewController : UIViewController<UINavigationControllerDelegate,M2ImageNavigationTransitionDelegate>
 @property (nonatomic, copy) NSString *imageName;
 @end

@@ -1,27 +1,27 @@
 //
-//  M2DeepeningNavigationTransition.m
+//  M2DeepeningPresentTransition.m
 //  MHelloTransition
 //
-//  Created by chenms on 17/7/26.
+//  Created by chenms on 17/7/30.
 //  Copyright © 2017年 chenms.m2. All rights reserved.
 //
 
-#import "M2DeepeningNavigationTransition.h"
+#import "M7DimmingPresentTransition.h"
 
+static double const kAnimationDuration = .3;
 static double const kBlackCoverColorAlpha = .5;
 static double const kScale = .95;
 
-@interface M2DeepeningNavigationTransition ()
-@property (nonatomic) M2DNTDeepeningNavigationTransitionType type;
+@interface M7DimmingPresentTransition ()
+@property (nonatomic) M7DPTDimmingPresentTransitionType type;
 @end
 
-@implementation M2DeepeningNavigationTransition
-
-+ (instancetype)transitionWithType:(M2DNTDeepeningNavigationTransitionType)type {
-    return [[M2DeepeningNavigationTransition alloc] initWithType:type];
+@implementation M7DimmingPresentTransition
++ (instancetype)transitionWithType:(M7DPTDimmingPresentTransitionType)type {
+    return [[M7DimmingPresentTransition alloc] initWithType:type];
 }
 
-- (instancetype)initWithType:(M2DNTDeepeningNavigationTransitionType)type {
+- (instancetype)initWithType:(M7DPTDimmingPresentTransitionType)type {
     self = [super init];
     if (self) {
         _type = type;
@@ -32,19 +32,19 @@ static double const kScale = .95;
 
 #pragma mark - UIViewControllerAnimatedTransitioning
 - (NSTimeInterval)transitionDuration:(nullable id <UIViewControllerContextTransitioning>)transitionContext {
-    return 2;
+    return kAnimationDuration;
 }
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
-    if (self.type == M2DNTDeepeningNavigationTransitionTypePush) {
-        [self push:transitionContext];
+    if (self.type == M7DPTDimmingPresentTransitionTypePresent) {
+        [self present:transitionContext];
     } else {
-        [self pop:transitionContext];
+        [self dismiss:transitionContext];
     }
 }
 
 #pragma mark -
-- (void)push:(id<UIViewControllerContextTransitioning>)transitionContext {
+- (void)present:(id<UIViewControllerContextTransitioning>)transitionContext {
     UIView *container = [transitionContext containerView];
     UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
@@ -55,7 +55,7 @@ static double const kScale = .95;
     [container addSubview:blackCover];
     
     CGRect toFinalFrame = [transitionContext finalFrameForViewController:toViewController];
-    CGRect toInitialFrame = CGRectOffset(toFinalFrame, CGRectGetWidth(container.bounds), 0);
+    CGRect toInitialFrame = CGRectOffset(toFinalFrame, 0, CGRectGetHeight(container.bounds));
     toViewController.view.frame = toInitialFrame;
     [container addSubview:toViewController.view];
     
@@ -72,7 +72,7 @@ static double const kScale = .95;
                      }];
 }
 
-- (void)pop:(id<UIViewControllerContextTransitioning>)transitionContext {
+- (void)dismiss:(id<UIViewControllerContextTransitioning>)transitionContext {
     UIView *container = [transitionContext containerView];
     UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
@@ -86,8 +86,8 @@ static double const kScale = .95;
     [container insertSubview:toViewController.view belowSubview:blackCover];
     
     CGRect fromInitialFrame = [transitionContext initialFrameForViewController:fromViewController];
-    CGRect fromFinalFrame = CGRectOffset(fromInitialFrame, CGRectGetWidth(container.bounds), 0);
-
+    CGRect fromFinalFrame = CGRectOffset(fromInitialFrame, 0, CGRectGetHeight(container.bounds));
+    
     // animation
     [UIView animateWithDuration:[self transitionDuration:transitionContext]
                      animations:^{
@@ -96,6 +96,7 @@ static double const kScale = .95;
                          toViewController.view.transform = CGAffineTransformIdentity;
                      } completion:^(BOOL finished) {
                          [blackCover removeFromSuperview];
+                         toViewController.view.transform = CGAffineTransformIdentity;
                          [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
                      }];
 }

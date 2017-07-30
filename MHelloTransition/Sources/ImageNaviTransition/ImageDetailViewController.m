@@ -7,13 +7,12 @@
 //
 
 #import "ImageDetailViewController.h"
-#import "M2ImageNavigationInteractiveTransition.h"
 #import "M2ImageNavigationTransition.h"
-#import "M2ImageNavigationInteractiveTransition.h"
+#import "M7PanDownInteractiveTransition.h"
 
-@interface ImageDetailViewController ()<UINavigationControllerDelegate>
+@interface ImageDetailViewController ()
 @property (nonatomic) UIImageView *imageView;
-@property (nonatomic) M2ImageNavigationInteractiveTransition *interactiveTransition;
+@property (nonatomic) M7PanDownInteractiveTransition *interactiveTransition;
 @end
 
 @implementation ImageDetailViewController
@@ -26,7 +25,7 @@
     [self.view addSubview:self.imageView];
     self.imageView.image = [UIImage imageNamed:self.imageName];
     
-    [self.interactiveTransition bindPopViewController:self];
+    [self.interactiveTransition bindViewController:self];
 }
 
 #pragma mark - Life Cycle
@@ -47,26 +46,14 @@
     self.imageView.frame = CGRectMake(margin, 64 + 20, imageWidth, imageWidth);
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    self.navigationController.delegate = self;
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    if (self.navigationController.delegate == self) {
-        self.navigationController.delegate = nil;
-    }
-}
-
 #pragma mark - UINavigationControllerDelegate
 - (nullable id <UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
                                             animationControllerForOperation:(UINavigationControllerOperation)operation
                                                          fromViewController:(UIViewController *)fromVC
                                                            toViewController:(UIViewController *)toVC {
-    if (operation == UINavigationControllerOperationPop) {
+    if (operation == UINavigationControllerOperationPush) {
+        return [M2ImageNavigationTransition transitionWithType:M2IPTImageNavigationTransitionTypePush];
+    } else {
         return [M2ImageNavigationTransition transitionWithType:M2IPTImageNavigationTransitionTypePop];
     }
     
@@ -97,9 +84,9 @@
     return _imageView;
 }
 
-- (M2ImageNavigationInteractiveTransition *)interactiveTransition {
+- (M7PanDownInteractiveTransition *)interactiveTransition {
     if (!_interactiveTransition) {
-        _interactiveTransition = [M2ImageNavigationInteractiveTransition new];
+        _interactiveTransition = [M7PanDownInteractiveTransition transitionWithType:M7PDIActionTypePop];
     }
     
     return _interactiveTransition;

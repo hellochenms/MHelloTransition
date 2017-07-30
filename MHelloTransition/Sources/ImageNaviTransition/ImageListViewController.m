@@ -17,7 +17,7 @@ static NSString * const kCellIdentifier = @"kCellIdentifier";
 - (void)initDatas;
 @end
 
-@interface ImageListViewController ()<UINavigationControllerDelegate>
+@interface ImageListViewController ()
 @property (nonatomic) UICollectionView *collectionView;
 @property (nonatomic) NSArray *datas;
 @property (nonatomic) UIImageView *selectedImageView;
@@ -43,32 +43,6 @@ static NSString * const kCellIdentifier = @"kCellIdentifier";
 #pragma mark - Life Cycle
 - (void)viewWillLayoutSubviews {
     self.collectionView.frame = self.view.bounds;
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    self.navigationController.delegate = self;
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    if (self.navigationController.delegate == self) {
-        self.navigationController.delegate = nil;
-    }
-}
-
-#pragma mark - UINavigationControllerDelegate
-- (nullable id <UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
-                                            animationControllerForOperation:(UINavigationControllerOperation)operation
-                                                         fromViewController:(UIViewController *)fromVC
-                                                           toViewController:(UIViewController *)toVC {
-    if (operation == UINavigationControllerOperationPush) {
-        return [M2ImageNavigationTransition transitionWithType:M2IPTImageNavigationTransitionTypePush];
-    }
-    
-    return nil;
 }
 
 #pragma mark - M2ImageNavigationTransitionDelegate
@@ -126,6 +100,7 @@ static NSString * const kCellIdentifier = @"kCellIdentifier";
     ImageDetailViewController *controller = [ImageDetailViewController new];
     NSString *imageName = self.datas[indexPath.row];
     controller.imageName = imageName;
+    self.navigationController.delegate = controller;
     [self.navigationController pushViewController:controller animated:YES];
 }
 

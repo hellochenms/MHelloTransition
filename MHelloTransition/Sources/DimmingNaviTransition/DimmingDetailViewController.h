@@ -1,5 +1,5 @@
 //
-//  DeepeningMainViewController.h
+//  DeepeningDetailViewController.h
 //  MHelloTransition
 //
 //  Created by chenms on 17/7/26.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DeepeningListViewController : UIViewController
+@interface DimmingDetailViewController : UIViewController<UINavigationControllerDelegate>
 
 @end

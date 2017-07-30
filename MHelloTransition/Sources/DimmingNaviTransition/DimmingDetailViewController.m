@@ -6,14 +6,14 @@
 //  Copyright © 2017年 chenms.m2. All rights reserved.
 //
 
-#import "DeepeningDetailViewController.h"
-#import "M2DeepeningNavigationTransition.h"
+#import "DimmingDetailViewController.h"
+#import "M7DimmingNavigationTransition.h"
 
-@interface DeepeningDetailViewController ()<UINavigationControllerDelegate>
+@interface DimmingDetailViewController ()
 
 @end
 
-@implementation DeepeningDetailViewController
+@implementation DimmingDetailViewController
 #pragma mark - Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,28 +22,15 @@
     self.view.backgroundColor = [UIColor whiteColor];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    self.navigationController.delegate = self;
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    if (self.navigationController.delegate == self) {
-        self.navigationController.delegate = nil;
-    }
-}
-
-
 #pragma mark - UINavigationControllerDelegate
 - (nullable id <UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
                                             animationControllerForOperation:(UINavigationControllerOperation)operation
                                                          fromViewController:(UIViewController *)fromVC
                                                            toViewController:(UIViewController *)toVC {
-    if (operation == UINavigationControllerOperationPop) {
-        return [M2DeepeningNavigationTransition transitionWithType:M2DNTDeepeningNavigationTransitionTypePop];
+    if (operation == UINavigationControllerOperationPush) {
+        return [M7DimmingNavigationTransition transitionWithType:M7DNTDimmingNavigationTransitionTypePush];
+    } else {
+        return [M7DimmingNavigationTransition transitionWithType:M7DNTDimmingNavigationTransitionTypePop];
     }
     
     return nil;

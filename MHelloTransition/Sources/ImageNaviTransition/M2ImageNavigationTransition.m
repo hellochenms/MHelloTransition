@@ -8,6 +8,8 @@
 
 #import "M2ImageNavigationTransition.h"
 
+static double const kAnimationDuration = .3;
+
 @interface M2ImageNavigationTransition ()
 @property (nonatomic) M2IPTImageNavigationTransitionType type;
 @end
@@ -29,7 +31,7 @@
 
 #pragma mark - UIViewControllerAnimatedTransitioning
 - (NSTimeInterval)transitionDuration:(nullable id <UIViewControllerContextTransitioning>)transitionContext {
-    return 2;
+    return kAnimationDuration;
 }
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
