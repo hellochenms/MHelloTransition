@@ -85,7 +85,6 @@ static double const kScale = .95;
     blackCover.backgroundColor = [UIColor colorWithWhite:0 alpha:kBlackCoverColorAlpha];
     [container insertSubview:blackCover belowSubview:fromViewController.view];
     
-    toViewController.view.frame = [transitionContext finalFrameForViewController:toViewController];
     toViewController.view.transform = CGAffineTransformMakeScale(kScale, kScale);
     [container insertSubview:toViewController.view belowSubview:blackCover];
     

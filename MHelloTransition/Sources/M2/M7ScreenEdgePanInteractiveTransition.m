@@ -1,36 +1,30 @@
 //
-//  M2ImageNavigationInteractiveTransition.m
+//  M7ScreenEdgePanInteractiveTransition.m
 //  MHelloTransition
 //
-//  Created by chenms on 17/7/23.
+//  Created by chenms on 17/7/31.
 //  Copyright © 2017年 chenms.m2. All rights reserved.
 //
 
-#import "M7PanDownInteractiveTransition.h"
+#import "M7ScreenEdgePanInteractiveTransition.h"
 
-static double kPanTotalHeightScreenHeightFactor = 1;
-static double kMinShouldFinishProgress = .3;
+static double const kMinShouldFinishProgress = .5;
 
-@interface M7PanDownInteractiveTransition ()
-@property (nonatomic) M7PDIActionType type;
+@interface M7ScreenEdgePanInteractiveTransition ()
 @property (nonatomic, weak) UIViewController *viewController;
 @property (nonatomic) BOOL shouldFinish;
 @property (nonatomic) BOOL isInteracting;
-@property (nonatomic) double panTotalHeight;
+@property (nonatomic) double panTotalWidth;
 @end
 
-@implementation M7PanDownInteractiveTransition
-
-#pragma mark - Init
-+ (instancetype)transitionWithType:(M7PDIActionType)type {
-    return [[M7PanDownInteractiveTransition alloc] initWithType:type];
+@implementation M7ScreenEdgePanInteractiveTransition
++ (instancetype)transition {
+    return [M7ScreenEdgePanInteractiveTransition new];
 }
 
-- (instancetype)initWithType:(M7PDIActionType)type {
+- (instancetype)init {
     self = [super init];
     if (self) {
-        _type = type;
-        _panTotalHeightScreenHeightFactor = kPanTotalHeightScreenHeightFactor;
         _minShouldFinishProgress = kMinShouldFinishProgress;
     }
     
@@ -42,30 +36,25 @@ static double kMinShouldFinishProgress = .3;
 - (void)bindViewController:(UIViewController *)popViewController {
     self.viewController = popViewController;
     
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPan:)];
+    UIScreenEdgePanGestureRecognizer *pan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(onPan:)];
+    pan.edges = UIRectEdgeLeft;
     self.viewController.view.userInteractionEnabled = YES;
     [self.viewController.view addGestureRecognizer:pan];
 }
 
 #pragma mark - Event
-- (void)onPan:(UIPanGestureRecognizer *)pan {
+- (void)onPan:(UIScreenEdgePanGestureRecognizer *)pan {
     CGPoint translation = [pan translationInView:pan.view];
-    NSLog(@"【chenms】translation:%.1f  %s", translation.y,  __func__);
     switch (pan.state) {
         case UIGestureRecognizerStateBegan: {
             self.isInteracting = YES;
-            self.panTotalHeight = CGRectGetHeight([UIScreen mainScreen].bounds) * self.panTotalHeightScreenHeightFactor;
-            if (self.type == M7PDIActionTypePop) {
-                [self.viewController
+            self.panTotalWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
+            [self.viewController
                  .navigationController popViewControllerAnimated:YES];
-            } else {
-                [self.viewController dismissViewControllerAnimated:YES completion:nil];
-            }
-            
             break;
         }
         case UIGestureRecognizerStateChanged: {
-            double progress = translation.y / self.panTotalHeight;
+            double progress = translation.x / self.panTotalWidth;
             progress = fmin(fmax(progress, 0), 1.0);
             self.shouldFinish = (progress >= self.minShouldFinishProgress);
             [self updateInteractiveTransition:progress];
@@ -78,7 +67,7 @@ static double kMinShouldFinishProgress = .3;
             } else {
                 [self finishInteractiveTransition];
             }
-            self.panTotalHeight = 0;
+            self.panTotalWidth = 0;
             self.isInteracting = NO;
             break;
         }
@@ -88,10 +77,6 @@ static double kMinShouldFinishProgress = .3;
 }
 
 #pragma mark - Setter
-- (void)setPanTotalHeightScreenHeightFactor:(double)panTotalHeightScreenHeightFactor {
-    _panTotalHeightScreenHeightFactor = fmin(fmax(panTotalHeightScreenHeightFactor, .1), 1);
-}
-
 - (void)setMinShouldFinishProgress:(double)minShouldFinishProgress {
     _minShouldFinishProgress = fmin(fmax(minShouldFinishProgress, .1), .9);
 }

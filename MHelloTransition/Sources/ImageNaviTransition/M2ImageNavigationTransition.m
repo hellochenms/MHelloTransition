@@ -8,7 +8,7 @@
 
 #import "M2ImageNavigationTransition.h"
 
-static double const kAnimationDuration = .3;
+static double const kAnimationDuration = 2;
 
 @interface M2ImageNavigationTransition ()
 @property (nonatomic) M2IPTImageNavigationTransitionType type;
@@ -50,7 +50,6 @@ static double const kAnimationDuration = .3;
     UIViewController<M2ImageNavigationTransitionDelegate> *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIImageView *toImageView = [toViewController m2_imageView];
     
-    // before
     fromImageView.hidden = YES;
     
     [container addSubview:toViewController.view];
@@ -83,8 +82,8 @@ static double const kAnimationDuration = .3;
     UIViewController<M2ImageNavigationTransitionDelegate> *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIImageView *toImageView = [toViewController m2_imageView];
     
-    // before
     fromImageView.hidden = YES;
+    
     [container insertSubview:toViewController.view belowSubview:fromViewController.view];
     toImageView.hidden = YES;
     
@@ -100,6 +99,8 @@ static double const kAnimationDuration = .3;
                          tempImageView.frame = tempToFrame;
                          fromViewController.view.alpha = 0.0;
                      } completion:^(BOOL finished) {
+#warning TODO
+                         // TODO: cancel时动画异常，但在部分手机或系统下正常
                          fromImageView.hidden = NO;
                          toImageView.hidden = NO;
                          [tempImageView removeFromSuperview];

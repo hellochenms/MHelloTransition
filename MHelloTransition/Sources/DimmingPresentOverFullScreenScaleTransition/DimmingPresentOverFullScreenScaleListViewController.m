@@ -55,7 +55,7 @@
     if (!_button) {
         _button = [UIButton buttonWithType:UIButtonTypeCustom];
         _button.backgroundColor = [UIColor brownColor];
-        [_button setTitle:@"Present" forState:UIControlStateNormal];
+        [_button setTitle:@"Present-不支持手势" forState:UIControlStateNormal];
         [_button addTarget:self action:@selector(onTap) forControlEvents:UIControlEventTouchUpInside];
     }
     

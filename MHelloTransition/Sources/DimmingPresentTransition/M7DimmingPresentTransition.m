@@ -62,12 +62,12 @@ static double const kScale = .95;
     // animation
     [UIView animateWithDuration:[self transitionDuration:transitionContext]
                      animations:^{
-                         toViewController.view.frame = toFinalFrame;
-                         blackCover.alpha = 1;
                          fromViewController.view.transform = CGAffineTransformMakeScale(kScale, kScale);
+                         blackCover.alpha = 1;
+                         toViewController.view.frame = toFinalFrame;
                      } completion:^(BOOL finished) {
-                         [blackCover removeFromSuperview];
                          fromViewController.view.transform = CGAffineTransformIdentity;
+                         [blackCover removeFromSuperview];
                          [transitionContext completeTransition:YES];
                      }];
 }
@@ -77,16 +77,16 @@ static double const kScale = .95;
     UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     
+    CGRect fromInitialFrame = [transitionContext initialFrameForViewController:fromViewController];
+    CGRect fromFinalFrame = CGRectOffset(fromInitialFrame, 0, CGRectGetHeight(container.bounds));
+    
     UIView *blackCover = [[UIView alloc] initWithFrame:container.bounds];
     blackCover.backgroundColor = [UIColor colorWithWhite:0 alpha:kBlackCoverColorAlpha];
     [container insertSubview:blackCover belowSubview:fromViewController.view];
     
-    toViewController.view.frame = [transitionContext finalFrameForViewController:toViewController];
     toViewController.view.transform = CGAffineTransformMakeScale(kScale, kScale);
     [container insertSubview:toViewController.view belowSubview:blackCover];
-    
-    CGRect fromInitialFrame = [transitionContext initialFrameForViewController:fromViewController];
-    CGRect fromFinalFrame = CGRectOffset(fromInitialFrame, 0, CGRectGetHeight(container.bounds));
+
     
     // animation
     [UIView animateWithDuration:[self transitionDuration:transitionContext]
@@ -96,7 +96,6 @@ static double const kScale = .95;
                          toViewController.view.transform = CGAffineTransformIdentity;
                      } completion:^(BOOL finished) {
                          [blackCover removeFromSuperview];
-                         toViewController.view.transform = CGAffineTransformIdentity;
                          [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
                      }];
 }

@@ -15,7 +15,7 @@ typedef NS_ENUM(NSUInteger, M7PDIActionType) {
 
 @interface M7PanDownInteractiveTransition : UIPercentDrivenInteractiveTransition
 @property (nonatomic, readonly) BOOL isInteracting;
-@property (nonatomic) double panTotalAndScreenHeightFactor;
+@property (nonatomic) double panTotalHeightScreenHeightFactor;
 @property (nonatomic) double minShouldFinishProgress;
 + (instancetype)transitionWithType:(M7PDIActionType)type;
 - (instancetype)initWithType:(M7PDIActionType)type;

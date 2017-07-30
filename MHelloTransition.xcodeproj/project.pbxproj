@@ -30,6 +30,7 @@
 		906DFFCF1F2E507C003C7775 /* DimmingPresentOverFullScreenScaleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 906DFFCE1F2E507C003C7775 /* DimmingPresentOverFullScreenScaleListViewController.m */; };
 		906DFFD21F2E508B003C7775 /* DimmingPresentOverFullScreenScaleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 906DFFD11F2E508B003C7775 /* DimmingPresentOverFullScreenScaleDetailViewController.m */; };
 		906DFFD51F2E509D003C7775 /* M7DimmingPresentOverFullScreenScaleTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 906DFFD41F2E509D003C7775 /* M7DimmingPresentOverFullScreenScaleTransition.m */; };
+		906DFFD81F2E5CEF003C7775 /* M7ScreenEdgePanInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 906DFFD71F2E5CEF003C7775 /* M7ScreenEdgePanInteractiveTransition.m */; };
 		90C0956D1F223F520006FA7D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0956C1F223F520006FA7D /* main.m */; };
 		90C095701F223F520006FA7D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0956F1F223F520006FA7D /* AppDelegate.m */; };
 		90C095731F223F520006FA7D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C095721F223F520006FA7D /* ViewController.m */; };
@@ -79,6 +80,8 @@
 		906DFFD11F2E508B003C7775 /* DimmingPresentOverFullScreenScaleDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DimmingPresentOverFullScreenScaleDetailViewController.m; sourceTree = "<group>"; };
 		906DFFD31F2E509D003C7775 /* M7DimmingPresentOverFullScreenScaleTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M7DimmingPresentOverFullScreenScaleTransition.h; sourceTree = "<group>"; };
 		906DFFD41F2E509D003C7775 /* M7DimmingPresentOverFullScreenScaleTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M7DimmingPresentOverFullScreenScaleTransition.m; sourceTree = "<group>"; };
+		906DFFD61F2E5CEF003C7775 /* M7ScreenEdgePanInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M7ScreenEdgePanInteractiveTransition.h; sourceTree = "<group>"; };
+		906DFFD71F2E5CEF003C7775 /* M7ScreenEdgePanInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M7ScreenEdgePanInteractiveTransition.m; sourceTree = "<group>"; };
 		90C095681F223F520006FA7D /* MHelloTransition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MHelloTransition.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90C0956C1F223F520006FA7D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		90C0956E1F223F520006FA7D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -137,6 +140,8 @@
 			children = (
 				900884171F2DD1A900A98556 /* M7PanDownInteractiveTransition.h */,
 				900884181F2DD1A900A98556 /* M7PanDownInteractiveTransition.m */,
+				906DFFD61F2E5CEF003C7775 /* M7ScreenEdgePanInteractiveTransition.h */,
+				906DFFD71F2E5CEF003C7775 /* M7ScreenEdgePanInteractiveTransition.m */,
 			);
 			name = M2;
 			path = Sources/M2;
@@ -329,6 +334,7 @@
 				90C095731F223F520006FA7D /* ViewController.m in Sources */,
 				906DFFD51F2E509D003C7775 /* M7DimmingPresentOverFullScreenScaleTransition.m in Sources */,
 				900883FD1F28E44000A98556 /* ImageDetailViewController.m in Sources */,
+				906DFFD81F2E5CEF003C7775 /* M7ScreenEdgePanInteractiveTransition.m in Sources */,
 				906DFFBF1F2DF5E7003C7775 /* DimmingPresentOverFullScreenListViewController.m in Sources */,
 				900883FC1F28E44000A98556 /* ImageCell.m in Sources */,
 				906DFFC01F2DF5E7003C7775 /* M7DimmingPresentOverFullScreenTransition.m in Sources */,

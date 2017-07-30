@@ -88,7 +88,7 @@
 - (M7PanDownInteractiveTransition *)interactiveTransition {
     if (!_interactiveTransition) {
         _interactiveTransition = [M7PanDownInteractiveTransition transitionWithType:M7PDIActionTypeDismiss];
-        _interactiveTransition.panTotalAndScreenHeightFactor = .5;
+        _interactiveTransition.panTotalHeightScreenHeightFactor = .5;
     }
     
     return _interactiveTransition;

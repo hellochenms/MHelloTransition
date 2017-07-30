@@ -8,9 +8,10 @@
 
 #import "DimmingDetailViewController.h"
 #import "M7DimmingNavigationTransition.h"
+#import "M7ScreenEdgePanInteractiveTransition.h"
 
 @interface DimmingDetailViewController ()
-
+@property (nonatomic) M7ScreenEdgePanInteractiveTransition *interactiveTransition;
 @end
 
 @implementation DimmingDetailViewController
@@ -18,8 +19,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self.interactiveTransition bindViewController:self];
 }
 
 #pragma mark - UINavigationControllerDelegate
@@ -34,6 +36,20 @@
     }
     
     return nil;
+}
+
+- (nullable id <UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController
+                                   interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>) animationController {
+    return self.interactiveTransition.isInteracting ? self.interactiveTransition : nil;
+}
+
+#pragma mark - Getter
+- (M7ScreenEdgePanInteractiveTransition *)interactiveTransition {
+    if (!_interactiveTransition) {
+        _interactiveTransition = [M7ScreenEdgePanInteractiveTransition transition];
+    }
+    
+    return _interactiveTransition;
 }
 
 @end

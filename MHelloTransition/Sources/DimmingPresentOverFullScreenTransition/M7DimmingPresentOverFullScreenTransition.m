@@ -114,11 +114,11 @@ static NSInteger const kBlackCoverTag = 15634;
                          [containerBlackCover removeFromSuperview];
                          
                          BOOL isCancelled = [transitionContext transitionWasCancelled];
-                         if (!isCancelled) {
+                         if (isCancelled) {
+                             presentedBlackCover.hidden = NO;
+                         } else {
                              [presentedBlackCover removeFromSuperview];
                              self.blackCoverViewController = nil;
-                         } else {
-                             presentedBlackCover.hidden = NO;
                          }
                          
                          [transitionContext completeTransition:!isCancelled];

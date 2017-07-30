@@ -62,12 +62,7 @@
 
 - (nullable id <UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController
                                    interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>) animationController {
-    if ([animationController isKindOfClass:[M2ImageNavigationTransition class]]
-        && self.interactiveTransition.isInteracting) {
-        return self.interactiveTransition;
-    }
-    
-    return nil;
+    return self.interactiveTransition.isInteracting ? self.interactiveTransition : nil;
 }
 
 #pragma mark - M2ImageNavigationTransitionDelegate
@@ -87,6 +82,7 @@
 - (M7PanDownInteractiveTransition *)interactiveTransition {
     if (!_interactiveTransition) {
         _interactiveTransition = [M7PanDownInteractiveTransition transitionWithType:M7PDIActionTypePop];
+        _interactiveTransition.panTotalHeightScreenHeightFactor = .5;
     }
     
     return _interactiveTransition;
