@@ -1,21 +1,24 @@
 //
-//  DimmingPresentOverFullScreenScaleListViewController.m
+//  PresentingProblemSolutionAListViewController.m
 //  MHelloTransition
 //
-//  Created by chenms on 17/7/31.
+//  Created by Chen,Meisong on 2017/8/17.
 //  Copyright © 2017年 chenms.m2. All rights reserved.
 //
 
-#import "DimmingPresentOverFullScreenScaleListViewController.h"
-#import "M7DimmingPresentOverFullScreenScaleTransition.h"
+#import "PresentingProblemSolutionAListViewController.h"
+#import "PresentingProblemSolutionATransition.h"
 #import "DimmingPresentOverFullScreenScaleDetailViewController.h"
+#import "M7PanDownInteractiveTransition.h"
 
-@interface DimmingPresentOverFullScreenScaleListViewController ()<UIViewControllerTransitioningDelegate>
+
+@interface PresentingProblemSolutionAListViewController ()<UIViewControllerTransitioningDelegate>
 @property (nonatomic) UIButton *button;
-@property (nonatomic) M7DimmingPresentOverFullScreenScaleTransition *transition;
+@property (nonatomic) PresentingProblemSolutionATransition *transition;
+@property (nonatomic) M7PanDownInteractiveTransition *interactiveTransition;
 @end
 
-@implementation DimmingPresentOverFullScreenScaleListViewController
+@implementation PresentingProblemSolutionAListViewController
 
 #pragma mark - Life Cycle
 - (void)viewDidLoad {
@@ -39,9 +42,14 @@
     return self.transition;
 }
 
+- (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id <UIViewControllerAnimatedTransitioning>)animator {
+    return self.interactiveTransition.isInteracting ? self.interactiveTransition : nil;
+}
+
 #pragma mark - Event
 - (void)onTap {
     DimmingPresentOverFullScreenScaleDetailViewController *controller = [DimmingPresentOverFullScreenScaleDetailViewController new];
+    [self.interactiveTransition bindViewController:controller];
     controller.modalPresentationStyle = UIModalPresentationCustom;
     controller.transitioningDelegate = self;
     [self presentViewController:controller
@@ -54,19 +62,28 @@
     if (!_button) {
         _button = [UIButton buttonWithType:UIButtonTypeCustom];
         _button.backgroundColor = [UIColor brownColor];
-        [_button setTitle:@"Present-不支持手势" forState:UIControlStateNormal];
+        [_button setTitle:@"Present-黑科技方案A（不推荐）" forState:UIControlStateNormal];
         [_button addTarget:self action:@selector(onTap) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return _button;
 }
 
-- (M7DimmingPresentOverFullScreenScaleTransition *)transition {
+- (PresentingProblemSolutionATransition *)transition {
     if (!_transition) {
-        _transition = [M7DimmingPresentOverFullScreenScaleTransition transition];
+        _transition = [PresentingProblemSolutionATransition transition];
     }
     
     return _transition;
+}
+
+- (M7PanDownInteractiveTransition *)interactiveTransition {
+    if (!_interactiveTransition) {
+        _interactiveTransition = [M7PanDownInteractiveTransition transitionWithType:M7PDIActionTypeDismiss];
+        _interactiveTransition.panTotalHeightScreenHeightFactor = .5;
+    }
+    
+    return _interactiveTransition;
 }
 
 @end

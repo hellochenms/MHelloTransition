@@ -1,24 +1,24 @@
 //
-//  DeepeningPresentListViewController.m
+//  PresentationControllerViewController.m
 //  MHelloTransition
 //
-//  Created by chenms on 17/7/30.
+//  Created by Chen,Meisong on 2017/8/17.
 //  Copyright © 2017年 chenms.m2. All rights reserved.
 //
 
-#import "DimmingPresentOverFullScreenListViewController.h"
-#import "DimmingPresentOverFullScreenDetailViewController.h"
-#import "M7DimmingPresentOverFullScreenTransition.h"
+#import "PresentationControllerViewController.h"
+#import "PresentationControllerDetailViewController.h"
+#import "M7DimmingPresentCustomTransition.h"
 #import "M7PanDownInteractiveTransition.h"
+#import "M7DimmingPresentationController.h"
 
-@interface DimmingPresentOverFullScreenListViewController ()<UIViewControllerTransitioningDelegate>
+@interface PresentationControllerViewController ()<UIViewControllerTransitioningDelegate>
 @property (nonatomic) UIButton *button;
-@property (nonatomic) M7DimmingPresentOverFullScreenTransition *presentTransition;
-@property (nonatomic) M7DimmingPresentOverFullScreenTransition *dismissTransition;
+@property (nonatomic) M7DimmingPresentCustomTransition *transition;
 @property (nonatomic) M7PanDownInteractiveTransition *interactiveTransition;
 @end
 
-@implementation DimmingPresentOverFullScreenListViewController
+@implementation PresentationControllerViewController
 
 #pragma mark - Life Cycle
 - (void)viewDidLoad {
@@ -35,20 +35,24 @@
 
 #pragma mark - UIViewControllerTransitioningDelegate
 - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-    return self.presentTransition;
+    return self.transition;
 }
 
 - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    return self.dismissTransition;
+    return self.transition;
 }
 
 - (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id <UIViewControllerAnimatedTransitioning>)animator {
     return self.interactiveTransition.isInteracting ? self.interactiveTransition : nil;
 }
 
+- (nullable UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(nullable UIViewController *)presenting sourceViewController:(UIViewController *)source {
+    return [[M7DimmingPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
+}
+
 #pragma mark - Event
 - (void)onTap {
-    DimmingPresentOverFullScreenDetailViewController *controller = [DimmingPresentOverFullScreenDetailViewController new];
+    PresentationControllerDetailViewController *controller = [PresentationControllerDetailViewController new];
     [self.interactiveTransition bindViewController:controller];
     controller.modalPresentationStyle = UIModalPresentationCustom;
     controller.transitioningDelegate = self;
@@ -69,20 +73,12 @@
     return _button;
 }
 
-- (M7DimmingPresentOverFullScreenTransition *)presentTransition {
-    if (!_presentTransition) {
-        _presentTransition = [M7DimmingPresentOverFullScreenTransition transitionWithType:M7DimmingPresentOverFullScreenTransitionTypePresent];
+- (M7DimmingPresentCustomTransition *)transition {
+    if (!_transition) {
+        _transition = [M7DimmingPresentCustomTransition transition];
     }
     
-    return _presentTransition;
-}
-
-- (M7DimmingPresentOverFullScreenTransition *)dismissTransition {
-    if (!_dismissTransition) {
-        _dismissTransition = [M7DimmingPresentOverFullScreenTransition transitionWithType:M7DimmingPresentOverFullScreenTransitionTypeDismiss];
-    }
-    
-    return _dismissTransition;
+    return _transition;
 }
 
 - (M7PanDownInteractiveTransition *)interactiveTransition {

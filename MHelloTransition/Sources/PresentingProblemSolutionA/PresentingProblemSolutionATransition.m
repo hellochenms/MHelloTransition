@@ -1,25 +1,26 @@
 //
-//  M7DimmingPresentOverFullScreenScaleTransition.m
+//  PresentingProblemSolutionATransition.m
 //  MHelloTransition
 //
-//  Created by chenms on 17/7/31.
+//  Created by Chen,Meisong on 2017/8/17.
 //  Copyright © 2017年 chenms.m2. All rights reserved.
 //
 
-#import "M7DimmingPresentOverFullScreenScaleTransition.h"
+#import "PresentingProblemSolutionATransition.h"
 
 static double const kAnimationDuration = .3;
 static double const kBlackCoverColorAlpha = .5;
 static double const kScale = .95;
 static NSInteger const kBlackCoverTag = 15634;
 
-@interface M7DimmingPresentOverFullScreenScaleTransition ()
+@interface PresentingProblemSolutionATransition ()
 @property (nonatomic, weak) UIViewController *blackCoverViewController;
+@property (nonatomic, weak) UIView *presentingViewSuperView;
 @end
 
-@implementation M7DimmingPresentOverFullScreenScaleTransition
+@implementation PresentingProblemSolutionATransition
 + (instancetype)transition {
-    return [M7DimmingPresentOverFullScreenScaleTransition new];
+    return [PresentingProblemSolutionATransition new];
 }
 
 #pragma mark - UIViewControllerAnimatedTransitioning
@@ -43,6 +44,11 @@ static NSInteger const kBlackCoverTag = 15634;
     UIView *container = [transitionContext containerView];
     UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    
+    // 为了让presentingView支持交互转场动画，而采用的黑科技
+    self.presentingViewSuperView = fromViewController.view.superview;
+    [fromViewController.view removeFromSuperview];
+    [container addSubview:fromViewController.view];
     
     // 动画中的黑色遮罩，和from、to的动画不同，故加在container上
     UIView *containerBlackCover = [[UIView alloc] initWithFrame:container.bounds];
@@ -92,15 +98,15 @@ static NSInteger const kBlackCoverTag = 15634;
     CGRect fromInitialFrame = [transitionContext initialFrameForViewController:fromViewController];
     CGRect fromFinalFrame = CGRectOffset(fromInitialFrame, 0, CGRectGetHeight(container.bounds));
     
+    // 非动画中的黑色遮罩
+    UIView *presentedBlackCover = [fromViewController.view viewWithTag:kBlackCoverTag];
+    presentedBlackCover.hidden = YES;
+    
     // 动画中的黑色遮罩
     UIView *containerBlackCover = [[UIView alloc] initWithFrame:container.bounds];
     containerBlackCover.backgroundColor = [UIColor colorWithWhite:0 alpha:kBlackCoverColorAlpha];
     containerBlackCover.alpha = 1;
     [container insertSubview:containerBlackCover belowSubview:fromViewController.view];
-    
-    // 非动画中的黑色遮罩
-    UIView *presentedBlackCover = [fromViewController.view viewWithTag:kBlackCoverTag];
-    [presentedBlackCover removeFromSuperview];
     
     // animation
     [UIView animateWithDuration:[self transitionDuration:transitionContext]
@@ -110,9 +116,19 @@ static NSInteger const kBlackCoverTag = 15634;
                          toViewController.view.transform = CGAffineTransformIdentity;
                      } completion:^(BOOL finished) {
                          [containerBlackCover removeFromSuperview];
+                         BOOL isCancelled = [transitionContext transitionWasCancelled];
+                         if (isCancelled) {
+                             presentedBlackCover.hidden = NO;
+                         } else {
+                             [presentedBlackCover removeFromSuperview];
+                             self.blackCoverViewController = nil;
                              
-                         // 不支持手势
-                         [transitionContext completeTransition:YES];
+                             // 为了让presentingView支持交互转场动画，而采用的黑科技
+                             [toViewController.view removeFromSuperview];
+                             [self.presentingViewSuperView addSubview:toViewController.view];
+                         }
+                         
+                         [transitionContext completeTransition:!isCancelled];
                      }];
 }
 

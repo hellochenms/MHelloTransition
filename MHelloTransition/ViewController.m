@@ -12,6 +12,8 @@
 #import "DimmingPresentListViewController.h"
 #import "DimmingPresentOverFullScreenListViewController.h"
 #import "DimmingPresentOverFullScreenScaleListViewController.h"
+#import "PresentingProblemSolutionAListViewController.h"
+#import "PresentationControllerViewController.h"
 
 @interface ViewController (Table)<UITableViewDataSource, UITableViewDelegate>
 - (void)initDatas;
@@ -67,6 +69,8 @@
                    @[@"Present渐深", [DimmingPresentListViewController class]],
                    @[@"PresentOverFullScreeb渐深", [DimmingPresentOverFullScreenListViewController class]],
                    @[@"PresentOverFullScreeb渐深Scale(不支持手势)", [DimmingPresentOverFullScreenScaleListViewController class]],
+                   @[@"渐深Scale手势-黑科技方案A", [PresentingProblemSolutionAListViewController class]],
+                   @[@"自定义PresentationController", [PresentationControllerViewController class]],
                    ];
 }
 

@@ -8,13 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSUInteger, M7DimmingPresentOverFullScreenScaleTransitionType) {
-    M7DimmingPresentOverFullScreenScaleTransitionTypePresent,
-    M7DimmingPresentOverFullScreenScaleTransitionTypeDismiss,
-};
-
 @interface M7DimmingPresentOverFullScreenScaleTransition : NSObject<UIViewControllerAnimatedTransitioning>
-
-+ (instancetype)transitionWithType:(M7DimmingPresentOverFullScreenScaleTransitionType)type;
-- (instancetype)initWithType:(M7DimmingPresentOverFullScreenScaleTransitionType)type;
++ (instancetype)transition;
 @end

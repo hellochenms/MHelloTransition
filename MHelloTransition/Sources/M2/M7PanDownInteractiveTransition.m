@@ -50,7 +50,6 @@ static double kMinShouldFinishProgress = .3;
 #pragma mark - Event
 - (void)onPan:(UIPanGestureRecognizer *)pan {
     CGPoint translation = [pan translationInView:pan.view];
-    NSLog(@"【chenms】translation:%.1f  %s", translation.y,  __func__);
     switch (pan.state) {
         case UIGestureRecognizerStateBegan: {
             self.isInteracting = YES;
