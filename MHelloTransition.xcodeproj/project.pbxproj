@@ -333,6 +333,7 @@
 				TargetAttributes = {
 					90C095671F223F520006FA7D = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = LD9JLNUXTG;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -342,6 +343,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -526,6 +528,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = LD9JLNUXTG;
 				INFOPLIST_FILE = MHelloTransition/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = chenms.m2.MHelloTransition;
@@ -537,6 +540,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = LD9JLNUXTG;
 				INFOPLIST_FILE = MHelloTransition/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = chenms.m2.MHelloTransition;
